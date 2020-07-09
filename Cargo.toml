@@ -1,0 +1,14 @@
+[package]
+name = "phonest"
+version = "0.1.0"
+authors = ["Kafji <k@kafji.net>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+lazy_static = "1.4.0"
+
+[dev-dependencies]
+assert_cmd = "1.0.1"
+predicates = "1.0.4"
