@@ -22,30 +22,21 @@ lazy_static! {
 fn phonetic_alphabet_of(text: &String) -> Vec<Option<&'static str>> {
     text.chars()
         .map(|c| c.to_ascii_uppercase())
-        .map(|c| match PHONETICS_ALPHABETS.get(&c) {
-            Some(s) => Some(*s),
-            _ => None,
-        })
+        .map(|c| PHONETICS_ALPHABETS.get(&c).map(|a| *a))
         .collect()
 }
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let text = match args.get(1) {
-        Some(s) => s,
-        None => {
-            eprintln!("Require 1 string argument. e.g. 'Hello world!'");
-            process::exit(1);
-        }
-    };
+    let text = args.get(1).unwrap_or_else(|| {
+        eprintln!("Require 1 string argument. e.g. 'Hello world!'");
+        process::exit(1);
+    });
 
     let phonetics = phonetic_alphabet_of(&text);
     let characters = text.chars().zip(phonetics);
     for character in characters {
-        let code = match character.1 {
-            Some(s) => s,
-            None => "",
-        };
+        let code = character.1.unwrap_or("");
         println!("{} -> {}", character.0, code);
     }
 }
