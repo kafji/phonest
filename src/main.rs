@@ -1,23 +1,4 @@
-const PHONETIC_ALPHABETS: [&str; 26] = [
-    "Alfa", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliet",
-    "Kilo", "London", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango",
-    "Uniform", "Victor", "Whiskey", "X-ray", "Yankee", "Zulu",
-];
-
-fn phonetic_alphabet_of(text: &str) -> Vec<Option<&str>> {
-    text.chars()
-        .map(|c| {
-            let d = c as u8;
-            if d >= 97 && d <= 122 {
-                return Some(PHONETIC_ALPHABETS[(d - 97) as usize]);
-            }
-            if d >= 65 && d <= 90 {
-                return Some(PHONETIC_ALPHABETS[(d - 65) as usize]);
-            }
-            None
-        })
-        .collect()
-}
+use ::spellit::*;
 
 fn main() -> anyhow::Result<()> {
     let matches = clap::App::new(env!("CARGO_PKG_NAME"))
@@ -33,7 +14,7 @@ fn main() -> anyhow::Result<()> {
         .get_matches();
 
     let text = matches.value_of_lossy("input").unwrap();
-    let phonetics = phonetic_alphabet_of(&text);
+    let phonetics = phonetic_alphabets_of(&text);
 
     let characters = text.chars().zip(phonetics);
     for character in characters {

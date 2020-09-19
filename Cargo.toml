@@ -5,6 +5,10 @@ authors = ["Kafji <k@kafji.net>"]
 license = "MIT OR Apache-2.0"
 edition = "2018"
 
+[[bench]]
+name = "benches"
+harness = false
+
 [dependencies]
 anyhow = "1.0"
 clap = "2.33"
@@ -12,4 +16,4 @@ dotenv_codegen = "0.15"
 
 [dev-dependencies]
 assert_cmd = "1.0"
-predicates = "1.0"
+criterion = "0.3"
