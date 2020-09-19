@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/kafji/spellit/workflows/Build/badge.svg)](https://github.com/kafji/spellit/actions?query=workflow%3ABuild)
 
-Map characters to its [phonetic alphabets](https://en.wikipedia.org/wiki/NATO_phonetic_alphabet).
+CLI application to map characters to its [phonetic alphabets](https://en.wikipedia.org/wiki/NATO_phonetic_alphabet).
 
 ### Usage
 
