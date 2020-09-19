@@ -1,42 +1,45 @@
-use lazy_static::lazy_static;
-use std::collections::HashMap;
-use std::env;
-use std::process;
+const PHONETIC_ALPHABETS: [&str; 26] = [
+    "Alfa", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliet",
+    "Kilo", "London", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango",
+    "Uniform", "Victor", "Whiskey", "X-ray", "Yankee", "Zulu",
+];
 
-lazy_static! {
-    // https://en.wikipedia.org/wiki/NATO_phonetic_alphabet
-    // Lima is replaced with London
-    static ref PHONETICS_ALPHABETS: HashMap<char, &'static str> = {
-        let phonetic_alphabets = [
-            "Alfa", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India",
-            "Juliet", "Kilo", "London", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo",
-            "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "X-ray", "Yankee", "Zulu",
-        ];
-        (b'A'..=b'Z')
-            .map(char::from)
-            .zip(phonetic_alphabets.iter().cloned())
-            .collect()
-    };
-}
-
-fn phonetic_alphabet_of(text: &String) -> Vec<Option<&'static str>> {
+fn phonetic_alphabet_of(text: &str) -> Vec<Option<&str>> {
     text.chars()
-        .map(|c| c.to_ascii_uppercase())
-        .map(|c| PHONETICS_ALPHABETS.get(&c).map(|a| *a))
+        .map(|c| {
+            let d = c as u8;
+            if d >= 97 && d <= 122 {
+                return Some(PHONETIC_ALPHABETS[(d - 97) as usize]);
+            }
+            if d >= 65 && d <= 90 {
+                return Some(PHONETIC_ALPHABETS[(d - 65) as usize]);
+            }
+            None
+        })
         .collect()
 }
 
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    let text = args.get(1).unwrap_or_else(|| {
-        eprintln!("Require 1 string argument. e.g. 'Hello world!'");
-        process::exit(1);
-    });
+fn main() -> anyhow::Result<()> {
+    let matches = clap::App::new(env!("CARGO_PKG_NAME"))
+        .setting(clap::AppSettings::ArgRequiredElseHelp)
+        .version(env!("CARGO_PKG_VERSION"))
+        .author(env!("CARGO_PKG_AUTHORS"))
+        .arg(
+            clap::Arg::with_name("input")
+                .required(true)
+                .value_name("TEXT")
+                .help("A literal text to spell in phonetic alphabet"),
+        )
+        .get_matches();
 
+    let text = matches.value_of_lossy("input").unwrap();
     let phonetics = phonetic_alphabet_of(&text);
+
     let characters = text.chars().zip(phonetics);
     for character in characters {
-        let code = character.1.unwrap_or("");
-        println!("{} -> {}", character.0, code);
+        let phonetic = character.1.unwrap_or("");
+        println!("{} -> {}", character.0, phonetic);
     }
+
+    Ok(())
 }
