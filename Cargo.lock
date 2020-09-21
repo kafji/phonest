@@ -559,10 +559,11 @@ dependencies = [
 
 [[package]]
 name = "spellit"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "assert_cmd",
+ "atty",
  "clap",
  "criterion",
  "dotenv_codegen",
