@@ -1,6 +1,6 @@
 [package]
 name = "spellit"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Kafji <k@kafji.net>"]
 license = "MIT OR Apache-2.0"
 edition = "2018"
@@ -13,7 +13,6 @@ harness = false
 anyhow = "1.0"
 atty = "0.2"
 clap = "2.33"
-dotenv_codegen = "0.15"
 
 [dev-dependencies]
 assert_cmd = "1.0"
