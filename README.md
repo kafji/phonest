@@ -4,7 +4,7 @@
 
 CLI application to map characters to its [phonetic alphabets](https://en.wikipedia.org/wiki/NATO_phonetic_alphabet).
 
-### Usage
+## Usage
 
 ```
 $ spellit 'Hello world!'
@@ -24,7 +24,7 @@ d -> Delta
 
 <br>
 
-### License
+## License & Contribution
 
 Licensed under either of
 
@@ -34,8 +34,6 @@ Licensed under either of
    ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
 
 at your option.
-
-### Contribution
 
 Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
