@@ -2,8 +2,9 @@
 name = "spellit"
 version = "0.3.1"
 authors = ["Kafji <k@kafji.net>"]
-license = "MIT OR Apache-2.0"
 edition = "2018"
+license = "MIT OR Apache-2.0"
+publish = false
 
 [[bench]]
 name = "benches"
