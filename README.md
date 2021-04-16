@@ -7,18 +7,16 @@ CLI application to map characters to its [phonetic alphabets](https://en.wikiped
 ## Usage
 
 ```
-$ spellit 'Hello world!'
+$ spellit 'Hello 123!'
 H -> Hotel
 e -> Echo
 l -> London
 l -> London
 o -> Oscar
-  -> 
-w -> Whiskey
-o -> Oscar
-r -> Romeo
-l -> London
-d -> Delta
+  ->
+1 -> One
+2 -> Two
+3 -> Three
 ! ->
 ```
 
