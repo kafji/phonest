@@ -19,3 +19,36 @@ pub fn phonetic_alphabets_of(text: &str) -> Vec<Option<&str>> {
         })
         .collect()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_ascii_letters() {
+        let txt = "abcxyz";
+        let phonetic = phonetic_alphabets_of(txt);
+        assert_eq!(
+            phonetic,
+            ["Alfa", "Bravo", "Charlie", "X-ray", "Yankee", "Zulu"]
+                .iter()
+                .cloned()
+                .map(|x| Some(x))
+                .collect::<Vec<_>>()
+        );
+    }
+
+    #[test]
+    fn test_ascii_numbers() {
+        let txt = "1337";
+        let phonetic = phonetic_alphabets_of(txt);
+        assert_eq!(phonetic, (0..4).map(|_| None).collect::<Vec<_>>());
+    }
+
+    #[test]
+    fn test_ascii_symbols() {
+        let txt = "!@#";
+        let phonetic = phonetic_alphabets_of(txt);
+        assert_eq!(phonetic, (0..3).map(|_| None).collect::<Vec<_>>());
+    }
+}
