@@ -21,12 +21,10 @@ o -> Oscar
 ! ->
 ```
 
-## Install
+## Installation
 
-```
-git clone https://github.com/kafji/spellit
-cd spellit
-cargo install --path ./
+```bash
+cargo install --git https://github.com/kafji/spellit
 ```
 
 ## Development
@@ -42,8 +40,6 @@ cargo test
 ```
 cargo bench
 ```
-
-<br>
 
 ## License & Contribution
 
